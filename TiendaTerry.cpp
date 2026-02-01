@@ -25,6 +25,7 @@ Paquete* buscarPorId(int id) {
     }
     return NULL;
 }
+
 // Funcion insertar al inicio 
 void insertarInicio(int id, string dest, float peso) {
     if (buscarPorId(id)) {
@@ -49,4 +50,43 @@ void insertarFinal(int id, string dest, float peso) {
     tail = nuevo;
     if (head == NULL) head = nuevo;
     cout << "Paquete insertado al final." << endl;
+}
+
+// Funcion mostrar lista adelante 
+void mostrarAdelante() {
+    if (head == NULL) { cout << "Lista vacia." << endl; return; }
+    Paquete* aux = head;
+    while (aux != NULL) {
+        cout << "[" << aux->id << " | " << aux->destinatario << "] <-> ";
+        aux = aux->sig;
+    }
+    cout << "NULL\n";
+}
+
+// Funcion mostrar lista atras
+void mostrarAtras() {
+    if (tail == NULL) { 
+        cout << "La lista de Terry esta vacia. No hay paquetes que mostrar." << endl;
+        return;
+    }
+
+    Paquete* aux = tail;
+    cout << "NULL <- ";
+    while (aux != NULL) {
+        cout << "[" << aux->id << " | " << aux->destinatario << "]";
+        if (aux->ant != NULL) cout << " <-> ";
+        aux = aux->ant; 
+    }
+    cout << " <- HEAD" << endl;
+}
+
+// Funcion mostrar cantidad 
+void mostrarCantidad() {
+    int contador = 0;
+    Paquete* aux = head;
+    while (aux != NULL) {
+        contador++;
+        aux = aux->sig;
+    }
+    cout << "Total de paquetes: " << contador << endl;
 }
