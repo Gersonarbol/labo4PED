@@ -133,3 +133,84 @@ void editarPaquete(int id) {
         cout << "Paquete no encontrado." << endl;
     }
 }
+
+int main() {
+    int opcion, id;
+    string dest;
+    float peso;
+
+    do {
+        cout << "SISTEMA DE TIENDA DE TERRY" << endl;
+        cout << "1) Insertar paquete al final" << endl; 
+        cout << "2) Insertar paquete al inicio" << endl; 
+        cout << "3) Mostrar lista adelante" << endl;  
+        cout << "4) Mostrar lista atras" << endl;  
+        cout << "5) Buscar paquete por ID" << endl;  
+        cout << "6) Eliminar paquete por ID" << endl; 
+        cout << "7) Mostrar cantidad total de paquetes" << endl;  
+        cout << "8) Editar paquete " << endl; 
+        cout << "0) Salir y liberar memoria" << endl; 
+        cout << "Opcion: ";
+        cin >> opcion;
+
+        switch(opcion) {
+            case 1:
+                cout << "Ingrese ID: "; cin >> id;
+                cout << "Destinatario: "; cin.ignore(); getline(cin, dest);
+                cout << "Peso: "; cin >> peso;
+                insertarFinal(id, dest, peso); 
+                break;
+
+            case 2:
+                cout << "Ingrese ID: "; cin >> id;
+                cout << "Destinatario: "; cin.ignore(); getline(cin, dest);
+                cout << "Peso: "; cin >> peso;
+                insertarInicio(id, dest, peso);
+                break;
+
+            case 3:
+                cout << "\nLista hacia adelante " << endl;
+                mostrarAdelante(); 
+                break;
+
+            case 4:
+                cout << "\nLista hacia atras " << endl;
+                mostrarAtras(); 
+                break;
+
+            case 5:
+                cout << "Ingrese ID para buscar: "; cin >> id;
+                if (buscarPorId(id)) {
+                    Paquete* p = buscarPorId(id);
+                    cout << "Paquete encontrado: " << p->destinatario << " (" << p->peso << "kg)" << endl;
+                } else {
+                    cout << "Paquete no existe." << endl;
+                }
+                break;
+
+            case 6:
+                cout << "Ingrese ID para eliminar: "; cin >> id;
+                eliminarPorId(id); 
+                break;
+
+            case 7:
+                mostrarCantidad(); 
+                break;
+
+            case 8:
+                cout << "Ingrese ID del paquete que quiere editar: "; cin >> id;
+                editarPaquete(id);
+                break;
+
+            case 0:
+                cout << "Liberando memoria y saliendo..." << endl;
+                liberarLista(); 
+                break;
+
+            default:
+                cout << "Opcion no valida." << endl;
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
