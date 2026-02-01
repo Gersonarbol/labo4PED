@@ -90,3 +90,33 @@ void mostrarCantidad() {
     }
     cout << "Total de paquetes: " << contador << endl;
 }
+// Funcion eliminar paquete por id
+void eliminarPorId(int id) {
+    Paquete* act = buscarPorId(id);
+    if (!act) { cout << "ID no encontrado." << endl; return; }
+
+    if (act == head) {
+        head = head->sig;
+        if (head) head->ant = NULL;
+        else tail = NULL;
+    } else if (act == tail) {
+        tail = tail->ant;
+        if (tail) tail->sig = NULL;
+    } else {
+        act->ant->sig = act->sig;
+        act->sig->ant = act->ant;
+    }
+    delete act;
+    cout << "Paquete eliminado." << endl;
+}
+
+// Funcion para liberar memoria al salir 
+void liberarLista() {
+    Paquete* aux = head;
+    while (aux != NULL) {
+        Paquete* borrar = aux;
+        aux = aux->sig;
+        delete borrar;
+    }
+    head = tail = NULL;
+}
