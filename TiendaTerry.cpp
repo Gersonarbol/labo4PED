@@ -90,6 +90,7 @@ void mostrarCantidad() {
     }
     cout << "Total de paquetes: " << contador << endl;
 }
+
 // Funcion eliminar paquete por id
 void eliminarPorId(int id) {
     Paquete* act = buscarPorId(id);
@@ -119,4 +120,16 @@ void liberarLista() {
         delete borrar;
     }
     head = tail = NULL;
+}
+
+//Funcion para editar (OPCION EXTRA B)
+void editarPaquete(int id) {
+    Paquete* p = buscarPorId(id);
+    if (p) {
+        cout << "Nuevo destinatario: "; cin.ignore(); getline(cin, p->destinatario);
+        cout << "Nuevo peso: "; cin >> p->peso;
+        cout << "Paquete actualizado." << endl;
+    } else {
+        cout << "Paquete no encontrado." << endl;
+    }
 }
